@@ -13,6 +13,16 @@ public class HomeController {
     @Autowired
     RoomRepository roomRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    RoleRepository roleRepository;
+
+    @RequestMapping("/home")
+    public String home(){
+        return "homepage";
+    }
     @RequestMapping("/")
     public String showRooms(){
         return "index";
@@ -20,5 +30,13 @@ public class HomeController {
     @RequestMapping("/login")
     public String login(){
         return "login";
+    }
+    @RequestMapping("/admin")
+    public String admin(){
+        return "admin";
+    }
+    @RequestMapping("/user")
+    public String user(){
+        return "user";
     }
 }
