@@ -48,9 +48,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-        auth
-                .userDetailsService(userDetailsServiceBean());
         auth.inMemoryAuthentication().withUser("DaveWolf").password("beastmaster").roles("ADMIN");
+        auth.userDetailsService(userDetailsServiceBean());
+
     }
 }
 

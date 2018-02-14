@@ -15,6 +15,10 @@ public class HomeController {
 
     @RequestMapping("/")
     public String showRooms(){
+        return "index";
+    }
+    @RequestMapping("/login")
+    public String login(){
         return "login";
     }
 }
