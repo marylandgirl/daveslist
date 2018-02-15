@@ -2,6 +2,7 @@ package com.example.daveslist;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 
 @Entity
 public class User {
@@ -31,6 +32,10 @@ public class User {
     @JoinTable(joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
+
+    public User() {
+        this.roles = new HashSet<>();
+    }
 
     public long getId() {
         return id;

@@ -1,6 +1,7 @@
 package com.example.daveslist;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
@@ -15,6 +16,10 @@ public class Role {
 
     @ManyToMany(mappedBy = "roles",fetch = FetchType.LAZY)
     private Collection<User> users;
+
+    public Role() {
+        this.users = new ArrayList<>();
+    }
 
     public long getId() {
         return id;
