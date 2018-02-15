@@ -10,9 +10,14 @@ public class DataLoader implements CommandLineRunner{
     @Autowired
     RoomRepository roomRepository;
 
+    @Autowired
+    RoleRepository roleRepository;
+
     @Override
     public void run(String... strings) throws Exception{
         System.out.println("Loading data ...");
+        roleRepository.save(new Role("USER"));
+        roleRepository.save(new Role("ADMIN"));
 
         Room room = new Room("123 Park Ave", "New York", "New York", "2500.00",
                 "Efficiency", "No Drugs", true, "Basic", true, false,false);

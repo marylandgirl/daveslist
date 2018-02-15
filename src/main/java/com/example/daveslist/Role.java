@@ -21,6 +21,10 @@ public class Role {
         this.users = new ArrayList<>();
     }
 
+    public Role(String role) {
+        this.role = role;
+    }
+
     public long getId() {
         return id;
     }
