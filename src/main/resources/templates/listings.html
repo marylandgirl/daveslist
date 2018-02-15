@@ -25,7 +25,8 @@
     <td th:text="${room.price}"></td>
 </tr>
 </tbody>
-<a sec:authorize="hasAuthority('ADMIN')" href="/admin">Admin</a>
+    <a  href="/register">Register</a><nr />
+    <a sec:authorize="hasAuthority('ADMIN')" href="/admin">Admin</a><nr />
     <a sec:authorize="hasAnyAuthority('ADMIN','USER')" href="/logout">Logout</a>
 </table>
 </body>

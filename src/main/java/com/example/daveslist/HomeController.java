@@ -3,10 +3,14 @@ package com.example.daveslist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.validation.Valid;
 
 
 @Controller
@@ -47,9 +51,30 @@ public class HomeController {
     public String failure(){return "failure";}
 
     @GetMapping("/register")
-    public String registerUser(Model model){
-        model.addAttribute("user",new User());
+    public String registerUser(Model model)
+    {
+        model.addAttribute("newUser",new User());
         return "registration";
+    }
+
+    @PostMapping("/register")
+    public String addNewUser(@Valid @ModelAttribute("NewUser") User newUser, BindingResult result, Model model)
+    {
+
+        if(result.hasErrors())
+        {
+            System.out.println(result.toString());
+            return "registration";
+        }
+        else{
+            //Create a new ordinary user
+            model.addAttribute(newUser.getUsername()+" created");
+            Role r = roleRepository.findByRole("USER");
+            userRepository.save(newUser);
+            newUser.addRole(r);
+            userRepository.save(newUser);
+            return "redirect:/private";
+        }
     }
 
     @RequestMapping("/list")

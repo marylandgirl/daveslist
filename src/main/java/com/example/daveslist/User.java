@@ -100,4 +100,9 @@ public class User {
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
     }
+
+    public void addRole(Role r)
+    {
+        this.roles.add(r);
+    }
 }
