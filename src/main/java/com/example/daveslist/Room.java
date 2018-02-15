@@ -39,23 +39,37 @@ public class Room {
     @NotEmpty
     private String rules;
 
-    @NotNull
-    @NotEmpty
-    private  boolean wifi;
+
+    private boolean wifi;
 
     @NotNull
     @NotEmpty
     private String cable;
 
-    @NotNull
-    @NotEmpty
+
     private boolean bathroom;
 
-    @NotNull
-    @NotEmpty
+
     private boolean isRented;
 
+
+    private boolean privated;
+
     public Room() {
+    }
+
+    public Room(String address, String city, String state, String price, String description, String rules, boolean wifi, String cable, boolean bathroom, boolean isRented, boolean privated) {
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.price = price;
+        this.description = description;
+        this.rules = rules;
+        this.wifi = wifi;
+        this.cable = cable;
+        this.bathroom = bathroom;
+        this.isRented = isRented;
+        this.privated = privated;
     }
 
     public long getId() {
@@ -144,5 +158,13 @@ public class Room {
 
     public void setRented(boolean rented) {
         isRented = rented;
+    }
+
+    public boolean isPrivated() {
+        return privated;
+    }
+
+    public void setPrivated(boolean privated) {
+        this.privated = privated;
     }
 }

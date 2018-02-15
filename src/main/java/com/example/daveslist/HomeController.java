@@ -2,6 +2,8 @@ package com.example.daveslist;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,8 +26,9 @@ public class HomeController {
         return "homepage";
     }
     @RequestMapping("/")
-    public String showRooms(){
-        return "index";
+    public String showRooms(Model model){
+        model.addAttribute("list",roomRepository.findAllByPrivated(false));
+        return "listings";
     }
     @RequestMapping("/login")
     public String login(){
@@ -39,4 +42,30 @@ public class HomeController {
     public String user(){
         return "user";
     }
+
+    @RequestMapping("/unlisted")
+    public String failure(){return "failure";}
+
+    @GetMapping("/register")
+    public String registerUser(Model model){
+        model.addAttribute("user",new User());
+        return "registration";
+    }
+
+    @RequestMapping("/list")
+    public String roomList(Model model){
+        model.addAttribute("list",roomRepository.findAll());
+        return "listings";
+    }
+    @RequestMapping("/private")
+    public String showPrivate(Model model){
+        model.addAttribute("list",roomRepository.findAll());
+        return "listings";
+    }
+    @RequestMapping("/public")
+    public String showpublic(Model model){
+        model.addAttribute("list",roomRepository.findAllByPrivated(false));
+        return "listings";
+    }
+
 }

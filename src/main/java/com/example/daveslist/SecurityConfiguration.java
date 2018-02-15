@@ -30,12 +30,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/admin","/h2-console/**").hasAuthority("ADMIN")
+                .antMatchers("/","/register","/home","/failure","/list","/public").permitAll()
+                .antMatchers("/admin","/h2-console/**","/unlisted").hasAuthority("ADMIN")
+                .antMatchers("/user","/private").hasAnyAuthority("USER","ADMIN")
                 .antMatchers("/user").hasAuthority("USER")
-                .antMatchers("/","/register","/home").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login").successForwardUrl("/").permitAll()
+                .formLogin().loginPage("/login").successForwardUrl("/private").failureForwardUrl("/public").permitAll()
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="www.thymeleaf.org"
+      xmlns:sec="http://www.tymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Listings</title>
+</head>
+<body>
+<a href="/login">Login</a>
+<h1>Listing page</h1>
+<table>
+<thead>
+<tr>
+    <th>Address</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Rent</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="room : ${list}">
+    <td th:text="${room.address}" ></td>
+    <td th:text="${room.city}"></td>
+    <td th:text="${room.state}"></td>
+    <td th:text="${room.price}"></td>
+</tr>
+</tbody>
+<a sec:authorize="hasAuthority('ADMIN')" href="/admin">Admin</a>
+    <a sec:authorize="hasAnyAuthority('ADMIN','USER')" href="/logout">Logout</a>
+</table>
+</body>
+</html>
